@@ -1,0 +1,151 @@
+{
+  "cases": [
+    {
+      "case_id": "ARW-001",
+      "description": "Revoked authority with protected consequence attempted and no revalidation.",
+      "actor": "agent_access_41",
+      "action": "continue_privileged_operation",
+      "output": "operation_continuation_requested",
+      "replay_trace": "trace_arw_001",
+      "prior_authority": true,
+      "authority_status": {
+        "authority_id": "AUTH-ACCESS-41",
+        "valid": false,
+        "revoked": true,
+        "revoked_at": "2026-06-01T00:00:00Z",
+        "revocation_basis": "operator_role_removed"
+      },
+      "attempted_at": "2026-06-01T01:00:00Z",
+      "protected_consequence_attempted": true,
+      "revalidated": false,
+      "custody": {
+        "valid": true,
+        "holder": "approved_registry"
+      },
+      "standing": {
+        "valid": true,
+        "relationship": "authorized_operator_record"
+      },
+      "expected_decision": "REVOKED_AUTHORITY_REFUSED",
+      "expected_severity": "ARW_P3"
+    },
+    {
+      "case_id": "ARW-002",
+      "description": "Revoked authority with valid fresh revalidation before continuation.",
+      "actor": "agent_access_41",
+      "action": "continue_privileged_operation",
+      "output": "operation_continuation_requested",
+      "replay_trace": "trace_arw_002",
+      "prior_authority": true,
+      "authority_status": {
+        "authority_id": "AUTH-ACCESS-41",
+        "valid": false,
+        "revoked": true,
+        "revoked_at": "2026-06-01T00:00:00Z",
+        "revocation_basis": "operator_role_removed"
+      },
+      "attempted_at": "2026-06-01T01:00:00Z",
+      "protected_consequence_attempted": true,
+      "revalidated": true,
+      "custody": {
+        "valid": true,
+        "holder": "approved_registry"
+      },
+      "standing": {
+        "valid": true,
+        "relationship": "fresh_authorized_operator_record"
+      },
+      "expected_decision": "AUTHORITY_VALID",
+      "expected_severity": "ARW_NONE"
+    },
+    {
+      "case_id": "ARW-003",
+      "description": "Authority revocation is pending but not yet active.",
+      "actor": "agent_access_41",
+      "action": "continue_privileged_operation",
+      "output": "operation_continuation_requested",
+      "replay_trace": "trace_arw_003",
+      "prior_authority": true,
+      "authority_status": {
+        "authority_id": "AUTH-ACCESS-41",
+        "valid": true,
+        "revoked": false,
+        "revocation_pending": true,
+        "revokes_at": "2026-06-02T00:00:00Z",
+        "revocation_basis": "scheduled_role_removal"
+      },
+      "attempted_at": "2026-06-01T12:00:00Z",
+      "protected_consequence_attempted": false,
+      "revalidated": false,
+      "custody": {
+        "valid": true,
+        "holder": "approved_registry"
+      },
+      "standing": {
+        "valid": true,
+        "relationship": "authorized_operator_record"
+      },
+      "expected_decision": "REVOCATION_WARNING",
+      "expected_severity": "ARW_P1"
+    },
+    {
+      "case_id": "ARW-004",
+      "description": "Operational trace changed, so authority revocation continuity cannot be isolated.",
+      "actor": "agent_payment_52",
+      "action": "continue_vendor_payment",
+      "output": "payment_target_changed",
+      "replay_trace": "trace_arw_004_changed",
+      "prior_authority": true,
+      "authority_status": {
+        "authority_id": "AUTH-PAYMENT-52",
+        "valid": false,
+        "revoked": true,
+        "revoked_at": "2026-06-01T00:00:00Z",
+        "revocation_basis": "payment_authority_removed"
+      },
+      "attempted_at": "2026-06-01T01:00:00Z",
+      "protected_consequence_attempted": true,
+      "revalidated": false,
+      "operational_divergence": true,
+      "custody": {
+        "valid": true,
+        "holder": "approved_treasury_registry"
+      },
+      "standing": {
+        "valid": true,
+        "relationship": "authorized_payment_operator"
+      },
+      "expected_decision": "OPERATIONAL_DIVERGENCE",
+      "expected_severity": "NOT_APPLICABLE"
+    },
+    {
+      "case_id": "ARW-005",
+      "description": "Revoked authority with protected consequence attempted and custody/standing invalid.",
+      "actor": "agent_record_77",
+      "action": "release_protected_record",
+      "output": "record_release_requested",
+      "replay_trace": "trace_arw_005",
+      "prior_authority": true,
+      "authority_status": {
+        "authority_id": "AUTH-RECORD-77",
+        "valid": false,
+        "revoked": true,
+        "revoked_at": "2026-06-01T00:00:00Z",
+        "revocation_basis": "record_release_authority_removed"
+      },
+      "attempted_at": "2026-06-01T01:00:00Z",
+      "protected_consequence_attempted": true,
+      "revalidated": false,
+      "custody": {
+        "valid": false,
+        "holder": "unverified_registry_clone"
+      },
+      "standing": {
+        "valid": false,
+        "relationship": "former_authorized_operator"
+      },
+      "expected_decision": "REVOKED_AUTHORITY_REFUSED",
+      "expected_severity": "ARW_P4"
+    }
+  ]
+}
