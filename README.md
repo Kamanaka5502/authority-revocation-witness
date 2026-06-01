@@ -1,5 +1,9 @@
 # Authority Revocation Witness
 
+[![Authority Revocation Witness Proof Pack](https://github.com/Kamanaka5502/authority-revocation-witness/actions/workflows/proof-pack.yml/badge.svg)](https://github.com/Kamanaka5502/authority-revocation-witness/actions/workflows/proof-pack.yml)
+
+![Authority Revocation Witness](assets/authority-revocation-witness-frontpage.svg)
+
 Authority Revocation Witness is a deterministic proof artifact showing that previously valid authority does not survive revocation.
 
 A system may preserve the same actor, action, output, and replay trace while the authority basis that originally admitted the action has been revoked.
