@@ -1,0 +1,63 @@
+{
+  "policy_id": "ARW-AUTHORITY-POLICY-v1",
+  "description": "Authority revocation policy for refusing continuation after an authority basis has been revoked.",
+  "dimensions": [
+    "actor_valid",
+    "action_executable",
+    "prior_authority",
+    "authority_revoked",
+    "protected_consequence_attempted",
+    "revalidated",
+    "custody_valid",
+    "standing_valid",
+    "operational_trace_intact"
+  ],
+  "decision_classes": {
+    "AUTHORITY_VALID": {
+      "condition": "Authority remains valid or continuation has been validly revalidated.",
+      "required_response": "ALLOW_CONTINUATION"
+    },
+    "REVOCATION_WARNING": {
+      "condition": "Authority revocation is pending but not yet active.",
+      "required_response": "LOG_AND_NOTIFY"
+    },
+    "REVALIDATION_REQUIRED": {
+      "condition": "Authority has been revoked, but no protected consequence is attempted yet.",
+      "required_response": "ESCALATE_FOR_REVALIDATION"
+    },
+    "REVOKED_AUTHORITY_REFUSED": {
+      "condition": "Authority has been revoked and protected consequence binding is attempted without revalidation.",
+      "required_response": "REFUSE_CONTINUATION"
+    },
+    "OPERATIONAL_DIVERGENCE": {
+      "condition": "Operational trace changed, so authority-revocation continuity cannot be isolated.",
+      "required_response": "CHECK_OPERATIONAL_DIVERGENCE"
+    }
+  },
+  "severity_classes": {
+    "ARW_NONE": {
+      "condition": "No authority revocation issue is present.",
+      "required_response": "ALLOW_CONTINUATION"
+    },
+    "ARW_P1": {
+      "condition": "Authority revocation is pending.",
+      "required_response": "LOG_AND_NOTIFY"
+    },
+    "ARW_P2": {
+      "condition": "Authority revoked but no protected consequence is attempted.",
+      "required_response": "REVALIDATION_REQUIRED"
+    },
+    "ARW_P3": {
+      "condition": "Revoked authority with protected consequence attempted.",
+      "required_response": "REFUSE_CONTINUATION"
+    },
+    "ARW_P4": {
+      "condition": "Revoked authority, protected consequence attempted, and custody or standing basis is no longer valid.",
+      "required_response": "REFUSE_OR_ROLLBACK"
+    },
+    "NOT_APPLICABLE": {
+      "condition": "Operational continuity failed, so authority revocation cannot be isolated.",
+      "required_response": "CHECK_OPERATIONAL_DIVERGENCE"
+    }
+  }
+}
