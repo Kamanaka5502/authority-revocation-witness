@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata from this file."
+title: "Authority Revocation Witness"
+version: "0.1.0"
+date-released: "2026-06-01"
+authors:
+  - family-names: "Revita"
+    given-names: "Samantha"
+repository-code: "https://github.com/Kamanaka5502/authority-revocation-witness"
+abstract: "A deterministic proof artifact showing that previously valid authority does not authorize continuation after revocation without valid revalidation."
+keywords:
+  - authority-revocation
+  - stale-authority
+  - admissibility
+  - runtime-governance
+  - deterministic-replay
+  - proof-artifact
+license: MIT
