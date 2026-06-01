@@ -1,0 +1,32 @@
+name: Authority Revocation Witness Proof Pack
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  proof-pack:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install test dependency
+        run: python -m pip install pytest
+
+      - name: Run proof pack
+        run: python proof_pack.py
+
+      - name: Run verifier tests
+        run: python -m pytest -q
+
+      - name: Ensure deterministic replay leaves repo clean
+        run: |
+          git status --short
+          test -z "$(git status --short)"
